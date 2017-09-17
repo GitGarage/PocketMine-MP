@@ -51,15 +51,17 @@ class CraftingEventPacket extends DataPacket{
 		$this->windowId = $this->getByte();
 		$this->type = $this->getVarInt();
 		$this->id = $this->getUUID();
+		$this->input = [];
+		$this->output = [];
 
 		$size = $this->getUnsignedVarInt();
 		for($i = 0; $i < $size and $i < 128; ++$i){
-			$this->input[] = $this->getSlot();
+			$this->input[$i] = $this->getSlot();
 		}
 
 		$size = $this->getUnsignedVarInt();
 		for($i = 0; $i < $size and $i < 128; ++$i){
-			$this->output[] = $this->getSlot();
+			$this->output[$i] = $this->getSlot();
 		}
 	}
 
